@@ -1,6 +1,7 @@
 package blackjack;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Hand {
 	ArrayList<Card> cards;
@@ -10,7 +11,12 @@ public class Hand {
 	}
 	
 	public int getScore(){
-		return 0;
+		int score = 0;
+		Collection<Card> collection = this.cards;
+		for(Card card : collection){
+			score += card.getScore();
+		}
+		return score;
 	}
 	
 	public int getCount(){

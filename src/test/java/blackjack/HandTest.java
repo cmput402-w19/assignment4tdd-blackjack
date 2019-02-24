@@ -34,7 +34,7 @@ public class HandTest extends TestCase {
 		cards3.add(card7);
 		Hand hand3 = new Hand(cards3);
 		
-		assertEquals(hand2.getScore(), 22);
+		assertEquals(hand3.getScore(), 22);
 		
 	}
 
