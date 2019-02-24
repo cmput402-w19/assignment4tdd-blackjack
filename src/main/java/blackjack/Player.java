@@ -8,6 +8,9 @@ public class Player {
 	
 	public Player(Hand hand){
 		this.hand = hand;
+		this.wins = 0;
+		this.losses = 0;
+		this.ties = 0;
 	}
 	
 	public Hand getHand(){
@@ -15,15 +18,15 @@ public class Player {
 	}
 	
 	public int getWins(){
-		return 0;
+		return -1;
 	}
 	
 	public int getLosses(){
-		return 0;
+		return -1;
 	}
 	
 	public int getTies(){
-		return 0;
+		return -1;
 	}
 	
 	public void setHand(Hand hand){
