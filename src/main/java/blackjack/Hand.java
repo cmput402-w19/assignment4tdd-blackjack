@@ -20,7 +20,7 @@ public class Hand {
 	}
 	
 	public int getCount(){
-		return 0;
+		return this.cards.size();
 	}
 
 	public ArrayList<Card> getCards(){
