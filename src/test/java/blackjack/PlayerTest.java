@@ -63,18 +63,23 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testSetWins(){
-		Player player = new Player(null);
+		Player player = new Player(hand2);
+		player.setWins(10);
+		assertEquals(player.getWins(), 10);
 		
 	}
 	
 	public void testSetLosses(){
-		Player player = new Player(null);
+		Player player = new Player(hand2);
+		player.setLosses(1);
+		assertEquals(player.getLosses(),1);
 		
 	}
 	
 	public void testSetTies(){
-		Player player = new Player(null);
-		
+		Player player = new Player(hand2);
+		player.setTies(999999);
+		assertEquals(player.getTies(), 999999);
 	}
 	
 }
