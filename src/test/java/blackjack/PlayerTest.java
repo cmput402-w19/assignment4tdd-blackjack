@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 
 public class PlayerTest extends TestCase {
-
-	public void testGetHand(){
+	
+	Hand hand2;
+	
+	public void setUp(){
 		Card card2 = new Card("king","hearts");
 		Card card3 = new Card("queen","hearts");
 		ArrayList<Card> cards2 = new ArrayList<Card>();
 		cards2.add(card2);
 		cards2.add(card3);
 		Hand hand2 = new Hand(cards2);
+	}
+	
+	public void testGetHand(){
 		Player player = new Player(hand2);
 		
 		assertEquals(player.getHand(), hand2);
@@ -20,7 +25,9 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testGetWins(){
-		Player player = new Player(null);
+		Player player = new Player(hand2);
+		
+		assertEquals(player.getWins(), 0);
 		
 	}
 	
