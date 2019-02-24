@@ -6,6 +6,30 @@ import junit.framework.TestCase;
 
 public class HandTest extends TestCase {
 	
+	public void testEquals(){
+		Card card1 = new Card("king","hearts");
+		ArrayList<Card> cards1 = new ArrayList<Card>();
+		cards1.add(card1);
+		Hand hand1 = new Hand(cards1);
+		Hand hand2 = new Hand(cards1);
+		
+		Card card4 = new Card("1","hearts");
+		Card card5 = new Card("2","hearts");
+		Card card6 = new Card("9","hearts");
+		Card card7 = new Card("10","hearts");
+		ArrayList<Card> cards3 = new ArrayList<Card>();
+		cards3.add(card4);
+		cards3.add(card5);
+		cards3.add(card6);
+		cards3.add(card7);
+		Hand hand3 = new Hand(cards3);
+		
+		assertEquals(hand1, hand2);
+		assertFalse(hand1.equals(hand3));
+		
+		
+	}
+	
 	public void testGetScore(){
 		Card card1 = new Card("king","hearts");
 		ArrayList<Card> cards1 = new ArrayList<Card>();
