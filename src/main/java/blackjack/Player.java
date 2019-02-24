@@ -7,11 +7,11 @@ public class Player {
 	private int ties;
 	
 	public Player(Hand hand){
-		
+		this.hand = hand;
 	}
 	
 	public Hand getHand(){
-		return new Hand(null);
+		return this.hand;
 	}
 	
 	public int getWins(){
