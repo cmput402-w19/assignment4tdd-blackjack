@@ -35,14 +35,15 @@ public class Player {
 	}
 	
 	public void setWins(int wins){
+		this.wins = wins;
 		
 	}
 	
 	public void setLosses(int losses){
-		
+		this.losses = losses;
 	}
 	
 	public void setTies(int ties){
-		
+		this.ties = ties;
 	}
 }
