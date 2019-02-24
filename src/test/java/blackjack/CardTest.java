@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 public class CardTest extends TestCase {
 	
 	public void testGetScore(){
-		Card card = Card('k', 's');
+		Card card = new Card("king", "s");
 		assertEquals(card.getScore(), 10);
 	}
 
