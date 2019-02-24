@@ -18,15 +18,15 @@ public class Player {
 	}
 	
 	public int getWins(){
-		return -1;
+		return this.wins;
 	}
 	
 	public int getLosses(){
-		return -1;
+		return this.losses;
 	}
 	
 	public int getTies(){
-		return -1;
+		return this.ties;
 	}
 	
 	public void setHand(Hand hand){
