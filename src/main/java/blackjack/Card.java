@@ -36,8 +36,7 @@ public class Card {
 	
 	
 	public int getScore() {
-		value = this.value;
-		return this.valueToScore.get(value);
+		return this.valueToScore.get(this.value);
 	}
 
 }
