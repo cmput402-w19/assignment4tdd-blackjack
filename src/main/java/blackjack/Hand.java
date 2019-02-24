@@ -2,12 +2,33 @@ package blackjack;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Hand {
 	ArrayList<Card> cards;
 	
 	public Hand(ArrayList<Card> cards){
 		this.cards = cards;
+	}
+	
+	@Override
+    public boolean equals(Object o) {
+		
+		if(!(o instanceof Hand)){
+			return false;
+		}
+		
+		Hand newHand = (Hand) o;
+		
+		HashSet<Card> thisCards =  new HashSet<Card>(this.cards);
+		HashSet<Card> newCards =  new HashSet<Card>(newHand.getCards());	
+		
+		if(!(thisCards.equals(newCards))){
+			return false;
+		}
+		
+		return true;
+		
 	}
 	
 	public int getScore(){
