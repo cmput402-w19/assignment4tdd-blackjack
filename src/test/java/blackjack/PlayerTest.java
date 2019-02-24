@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 public class PlayerTest extends TestCase {
 	
 	Hand hand2;
+	Hand hand3;
 	
 	public void setUp(){
 		Card card2 = new Card("king","hearts");
@@ -14,7 +15,17 @@ public class PlayerTest extends TestCase {
 		ArrayList<Card> cards2 = new ArrayList<Card>();
 		cards2.add(card2);
 		cards2.add(card3);
-		Hand hand2 = new Hand(cards2);
+		hand2 = new Hand(cards2);
+		
+		Card card4 = new Card("1","hearts");
+		Card card5 = new Card("3","hearts");
+		Card card6 = new Card("10","hearts");
+		ArrayList<Card> cards3 = new ArrayList<Card>();
+		cards3.add(card4);
+		cards3.add(card5);
+		cards3.add(card6);
+		hand3 = new Hand(cards3);
+		
 	}
 	
 	public void testGetHand(){
@@ -45,8 +56,10 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testSetHand(){
-		Player player = new Player(null);
-		
+		Player player = new Player(hand2);
+		player.setHand(hand3);
+		assertEquals(player.getHand(), hand3);
+			
 	}
 	
 	public void testSetWins(){
