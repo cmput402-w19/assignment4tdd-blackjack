@@ -34,6 +34,25 @@ public class Card {
 			
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		
+		if(!(o instanceof Card)){
+			return false;
+		}
+		
+		Card card = (Card) o;
+		
+		if(!(this.suite.equals(card.suite))){
+			return false;
+		}
+		
+		if(!(this.value.equals(card.value))){
+			return false;
+		}
+		
+		return true;
+	}
 	
 	public int getScore() {
 		return this.valueToScore.get(this.value);
