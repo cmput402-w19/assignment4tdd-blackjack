@@ -138,17 +138,19 @@ public class Game {
 		}
 	}
 	
-	
+	// play for the current player's drawing round of the game
 	public void playRound() {
 		Scanner keyboardScanner = new Scanner(System.in);
-		String resp = null;
 		boolean repeat = true;
+
+		// repeat until the player can't anymore.
 		while(repeat) {
 			printStatus();
 			promptNextPlayer();
 			String line = keyboardScanner.nextLine();
 			repeat = doTurn(line);
 		}
+		nextPlayer();
 	}
 
 	public void nextPlayer() {
@@ -156,7 +158,16 @@ public class Game {
 		this.currentPlayer = p;
 	}
 
-
+	public int getWinnerNum() {
+		int winNum = 0;
+		if (winner == player1) {
+			winNum = 1;
+		}
+		else {
+			winNum = 2;
+		}
+		return winNum;
+	}
 
     public static void main(String args[]){
 		// setup
@@ -179,18 +190,13 @@ public class Game {
 
 		while (game.getWinner() == null) {
 			Scanner keyboardScanner = new Scanner(System.in);
-			String resp = null;
-			game.playRound();
 			game.nextPlayer();
+
+			// if looped back to player 1, then everyone has had their turn, so end this game
+			if(game.currentPlayer == player1) {
+				break;
+			}
 		};
-		Player winner = game.getWinner();
-		int winNum = 0;
-		if (winner == player1) {
-			winNum = 1;
-		}
-		else if (winner == player2) {
-			winNum = 2;
-		}
-		System.out.println("Player " + winNum + " wins!");
+		System.out.println("Player " + game.getWinnerNum() + " wins!");
 	}
 }
