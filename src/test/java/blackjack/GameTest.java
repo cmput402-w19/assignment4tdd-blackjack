@@ -338,5 +338,37 @@ public class GameTest extends TestCase {
 		assertSame(player2, game.getCurrentPlayer());
 	}
 
+	@Test
+	public void testCalculateWinnerPlayer1Wins() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(2);
+		when(h2.getScore()).thenReturn(1);
+
+		game.calculateWinner();
+
+		assertSame(player1, game.getWinner());
+		
+	}
+
+	@Test
+	public void testCalculateWinnerPlayer2Wins() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(1);
+		when(h2.getScore()).thenReturn(2);
+
+		game.calculateWinner();
+
+		assertSame(player2, game.getWinner());
+		
+	}
+
 }
 
