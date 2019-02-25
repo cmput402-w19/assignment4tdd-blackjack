@@ -142,6 +142,8 @@ public class Game {
 	}
 
 	public void nextPlayer() {
+		Player p = (this.currentPlayer == player1 ? player2 : player1);
+		this.currentPlayer = p;
 	}
 
 
