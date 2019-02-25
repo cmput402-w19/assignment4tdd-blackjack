@@ -23,6 +23,11 @@ public class CardTest extends TestCase {
 		assertEquals(card5.getValue(), Value.EIGHT);
 		assertNotEquals(card5.getValue(), Value.NINE);
 		
+		Card card6 = new Card(Suit.CLUB, Value.TEN);
+		Card card7 = new Card(Suit.CLUB, Value.ACE);
+		
+		assertNotEquals(card6, card7);
+		
 		Card aCard = new Card(Suit.CLUB, Value.EIGHT);
 		Card aCard2 = null;
 		assertTrue(aCard instanceof Card);
