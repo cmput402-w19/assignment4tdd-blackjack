@@ -139,11 +139,12 @@ public class Game {
 				System.out.println("Error: invalid input.");
 			}
 		}
-		this.currentPlayer = (this.currentPlayer == player1 ? player2 : player1);
 	}
 
-    public static void main(String args[]){
+	this.currentPlayer = (this.currentPlayer == player1 ? player2 : player1);
 
+
+    public static void main(String args[]){
 		// setup
 		Deck deck = new Deck();
 		Player player1;
