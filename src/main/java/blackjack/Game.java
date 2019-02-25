@@ -169,34 +169,30 @@ public class Game {
 		return winNum;
 	}
 
+	public void calculateWinner() {
+		return;
+	}
+
     public static void main(String args[]){
 		// setup
-		Deck deck = new Deck();
-		Player player1;
-		Player player2;
-		
+		Deck deck = new Deck();		
 		deck.createDeck();
 		deck.shuffleDeck();
-		ArrayList<ArrayList<Card>> cardsList = new ArrayList<ArrayList<Card>>();
-		cardsList = deck.dealCards();
-		
-		Hand hand1 = new Hand(cardsList.get(0));
-		Hand hand2 = new Hand(cardsList.get(1));
-		
-		player1 = new Player(hand1);
-		player2 = new Player(hand2);
+		ArrayList<ArrayList<Card>> cardsList = deck.dealCards();
+		Player player1 = new Player(new Hand(cardsList.get(0)));
+		Player player2 = new Player(new Hand(cardsList.get(1)));
 
 		Game game = new Game(deck, player1, player2);
 
 		while (game.getWinner() == null) {
 			Scanner keyboardScanner = new Scanner(System.in);
-			game.nextPlayer();
+			game.playRound();
 
 			// if looped back to player 1, then everyone has had their turn, so end this game
-			if(game.currentPlayer == player1) {
-				break;
-			}
+			if(game.currentPlayer == player1) break;
 		};
-		System.out.println("Player " + game.getWinnerNum() + " wins!");
+
+		// if no from one player going over, then calculate
+		game.calculateWinner();
 	}
 }
