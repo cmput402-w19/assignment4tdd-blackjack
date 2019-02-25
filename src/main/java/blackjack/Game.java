@@ -141,7 +141,9 @@ public class Game {
 		}
 	}
 
-	this.currentPlayer = (this.currentPlayer == player1 ? player2 : player1);
+	public void nextPlayer() {
+	}
+
 
 
     public static void main(String args[]){

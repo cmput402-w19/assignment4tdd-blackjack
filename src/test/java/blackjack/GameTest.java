@@ -54,9 +54,9 @@ public class GameTest extends TestCase {
 	public void testSetPlayer2(){
 		Player p1 = mock(Player.class);
 
-		game.setPlayer1(p1);
+		game.setPlayer2(p1);
 
-		assertSame(p1, game.getPlayer1());
+		assertSame(p1, game.getPlayer2());
 	}
 
 	@Test
@@ -192,6 +192,13 @@ public class GameTest extends TestCase {
 
 		// starting with 0 scores
 		assertEquals("Player 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
+	}
+
+	@Test
+	public void testNextPlayerWhenCurrentIs1() {
+		game.nextPlayer();
+
+		assertSame(player2, game.getCurrentPlayer());
 	}
 
 	
