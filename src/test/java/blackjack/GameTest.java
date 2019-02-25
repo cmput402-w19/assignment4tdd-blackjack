@@ -115,5 +115,33 @@ public class GameTest extends TestCase {
 	public void testNoWinnerAtStart() {
 		assertEquals(game.getWinner(), null);
 	}
+
+	@Test
+	public void testDealerDraw() {
+		boolean b;
+		when(deck.draw()).thenReturn(mock(Card.class));
+		try {
+			b = game.dealer("y", player1);
+			assertEquals(true, b);
+		}
+		catch (Exception e) {
+			System.out.println("\n\n\n\n\nexception");
+
+		}
+	}
+
+	@Test
+	public void testDealerStay() {
+		boolean b;
+		when(deck.draw()).thenReturn(mock(Card.class));
+		try {
+			b = game.dealer("n", player1);
+			assertEquals(false, b);
+		}
+		catch (Exception e) {
+			System.out.println("\n\n\n\n\nexception");
+
+		}
+	}
 }
 
