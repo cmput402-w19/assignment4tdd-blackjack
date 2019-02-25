@@ -102,12 +102,6 @@ public class Game {
 		}
 	}
 
-	// Keep playing rounds when user enters desired input
-	public void play(){
-		System.out.println("hello");
-		
-	}
-
 	// true: can draw again
 	// false: unable to draw again
 	public boolean doTurn(String line) {
@@ -170,7 +164,13 @@ public class Game {
 	}
 
 	public void calculateWinner() {
-		return;
+		if (player1.getHand().getScore() > player2.getHand().getScore()) {
+			winner = player1; 
+		}
+		else {
+			winner = player2;
+		}
+		System.out.println("Player " + getWinnerNum() + " wins!");	
 	}
 
     public static void main(String args[]){

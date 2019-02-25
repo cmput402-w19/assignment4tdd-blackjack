@@ -161,9 +161,21 @@ public class GameTest extends TestCase {
 			assertEquals(false, b);
 		}
 		catch (Exception e) {
-			System.out.println("\n\n\n\n\n");
+			System.out.println("\n\n\nexception");
 
 
+		}
+	}
+
+	@Test (expected = InvalidInputException.class)
+	public void testDealerInvalidInput() {
+		boolean b;
+		when(deck.draw()).thenReturn(mock(Card.class));
+		try {
+			b = game.deal("p", player1);
+		}
+		catch (InvalidInputException e) {
+			// ignore. this is expected to happen
 		}
 	}
 
@@ -298,6 +310,21 @@ public class GameTest extends TestCase {
 		when(h2.getScore()).thenReturn(1);
 
 		assertFalse(game.doTurn("n"));
+
+	}
+
+	@Test
+	public void testDoTurnCatchException() {
+		Hand h2 = mock(Hand.class);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.setCurrentPlayer(player2);
+
+		when(h2.getScore()).thenReturn(1);
+
+		// exception handling in case of invalid input should
+		// return true, as they can still do another turn.
+		assertTrue(game.doTurn("p"));
 
 	}
 
