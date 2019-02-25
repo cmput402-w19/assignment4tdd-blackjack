@@ -20,6 +20,7 @@ public class GameTest extends TestCase {
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 	private final PrintStream originalErr = System.err;
+	private final InputStream originalIn = System.in;
 	
 	@Before
 	public void setUp(){
@@ -38,6 +39,7 @@ public class GameTest extends TestCase {
 	public void restoreStreams() {
 		System.setOut(originalOut);
 		System.setErr(originalErr);
+		System.setIn(originalIn);
 	}
 	
 	
@@ -301,7 +303,40 @@ public class GameTest extends TestCase {
 
 
 
+	@Test
+	public void testGetWinnerNumP1() {
+		game.setWinner(player1);
+		assertEquals(1, game.getWinnerNum());
 
-	
+	}
+
+	@Test
+	public void testGetWinnerNumP2() {
+		game.setWinner(player2);
+		assertEquals(2, game.getWinnerNum());
+
+	}
+
+	@Test
+	public void testplayRound() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(2);
+		when(h2.getScore()).thenReturn(1);
+
+
+		String input = "n\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		game.playRound();
+
+		// check that player 1 finishes the turn
+		assertSame(player2, game.getCurrentPlayer());
+	}
+
 }
 
