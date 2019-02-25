@@ -10,16 +10,16 @@ public class PlayerTest extends TestCase {
 	Hand hand3;
 	
 	public void setUp(){
-		Card card2 = new Card("king","hearts");
-		Card card3 = new Card("queen","hearts");
+		Card card2 = new Card(Suit.HEART, Value.KING);
+		Card card3 = new Card(Suit.HEART, Value.QUEEN);
 		ArrayList<Card> cards2 = new ArrayList<Card>();
 		cards2.add(card2);
 		cards2.add(card3);
 		hand2 = new Hand(cards2);
 		
-		Card card4 = new Card("1","hearts");
-		Card card5 = new Card("3","hearts");
-		Card card6 = new Card("10","hearts");
+		Card card4 = new Card(Suit.HEART,Value.ACE);
+		Card card5 = new Card(Suit.HEART,Value.THREE);
+		Card card6 = new Card(Suit.HEART,Value.TEN);
 		ArrayList<Card> cards3 = new ArrayList<Card>();
 		cards3.add(card4);
 		cards3.add(card5);

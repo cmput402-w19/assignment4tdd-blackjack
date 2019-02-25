@@ -5,121 +5,61 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 
 public class HandTest extends TestCase {
+	Card card1;
+	Card card4;
+	Card card5;
+	Card card6;
 	
-	public void testEquals(){
-		Card card1 = new Card("king","hearts");
-		ArrayList<Card> cards1 = new ArrayList<Card>();
+	ArrayList<Card> cards1;
+	ArrayList<Card> cards3;
+	
+	Hand hand1;
+	Hand hand2;
+	Hand hand3;
+	
+	public void setUp(){
+		card1 = new Card(Suit.SPADE, Value.KING);
+		cards1 = new ArrayList<Card>();
 		cards1.add(card1);
-		Hand hand1 = new Hand(cards1);
-		Hand hand2 = new Hand(cards1);
+		hand1 = new Hand(cards1);
+		hand2 = new Hand(cards1);
 		
-		Card card4 = new Card("1","hearts");
-		Card card5 = new Card("2","hearts");
-		Card card6 = new Card("9","hearts");
-		Card card7 = new Card("10","hearts");
-		ArrayList<Card> cards3 = new ArrayList<Card>();
+		card4 = new Card(Suit.HEART, Value.EIGHT);
+		card5 = new Card(Suit.HEART, Value.TWO);
+		card6 = new Card(Suit.HEART, Value.TEN);
+		cards3 = new ArrayList<Card>();
 		cards3.add(card4);
 		cards3.add(card5);
 		cards3.add(card6);
-		cards3.add(card7);
-		Hand hand3 = new Hand(cards3);
+		hand3 = new Hand(cards3);
+		
+	}
+	
+	public void testEquals(){
 		
 		assertEquals(hand1, hand2);
 		assertFalse(hand1.equals(hand3));
 		
-		
 	}
 	
 	public void testGetScore(){
-		Card card1 = new Card("king","hearts");
-		ArrayList<Card> cards1 = new ArrayList<Card>();
-		cards1.add(card1);
-		Hand hand1 = new Hand(cards1);
 		
 		assertEquals(hand1.getScore(), 10);
 		
-		Card card2 = new Card("king","hearts");
-		Card card3 = new Card("queen","hearts");
-		ArrayList<Card> cards2 = new ArrayList<Card>();
-		cards2.add(card2);
-		cards2.add(card3);
-		Hand hand2 = new Hand(cards2);
-		
-		assertEquals(hand2.getScore(), 20);
-		
-		Card card4 = new Card("1","hearts");
-		Card card5 = new Card("2","hearts");
-		Card card6 = new Card("9","hearts");
-		Card card7 = new Card("10","hearts");
-		ArrayList<Card> cards3 = new ArrayList<Card>();
-		cards3.add(card4);
-		cards3.add(card5);
-		cards3.add(card6);
-		cards3.add(card7);
-		Hand hand3 = new Hand(cards3);
-		
-		assertEquals(hand3.getScore(), 22);
+		assertEquals(hand3.getScore(), 20);
 		
 	}
 	
 	public void testGetCount(){
-		Card card1 = new Card("king","hearts");
-		ArrayList<Card> cards1 = new ArrayList<Card>();
-		cards1.add(card1);
-		Hand hand1 = new Hand(cards1);
 		
 		assertEquals(hand1.getCount(), 1);
 		
-		Card card2 = new Card("king","hearts");
-		Card card3 = new Card("queen","hearts");
-		ArrayList<Card> cards2 = new ArrayList<Card>();
-		cards2.add(card2);
-		cards2.add(card3);
-		Hand hand2 = new Hand(cards2);
-		
-		assertEquals(hand2.getCount(), 2);
-		
-		Card card4 = new Card("1","hearts");
-		Card card5 = new Card("2","hearts");
-		Card card6 = new Card("9","hearts");
-		Card card7 = new Card("10","hearts");
-		ArrayList<Card> cards3 = new ArrayList<Card>();
-		cards3.add(card4);
-		cards3.add(card5);
-		cards3.add(card6);
-		cards3.add(card7);
-		Hand hand3 = new Hand(cards3);
-		
-		assertEquals(hand3.getCount(), 4);
+		assertEquals(hand3.getCount(), 3);
 	}
 	
 	public void	testGetCards(){
-		Card card1 = new Card("king","hearts");
-		ArrayList<Card> cards1 = new ArrayList<Card>();
-		cards1.add(card1);
-		Hand hand1 = new Hand(cards1);
 		
 		assertEquals(hand1.getCards(), cards1);
-		
-		Card card2 = new Card("king","hearts");
-		Card card3 = new Card("queen","hearts");
-		ArrayList<Card> cards2 = new ArrayList<Card>();
-		cards2.add(card2);
-		cards2.add(card3);
-		Hand hand2 = new Hand(cards2);
-		
-		assertEquals(hand2.getCards(), cards2);
-		
-		Card card4 = new Card("1","hearts");
-		Card card5 = new Card("2","hearts");
-		Card card6 = new Card("9","hearts");
-		Card card7 = new Card("10","hearts");
-		ArrayList<Card> cards3 = new ArrayList<Card>();
-		cards3.add(card4);
-		cards3.add(card5);
-		cards3.add(card6);
-		cards3.add(card7);
-		Hand hand3 = new Hand(cards3);
 		
 		assertEquals(hand3.getCards(), cards3);
 	}
