@@ -64,24 +64,29 @@ public class Game {
 	// Code taken from Sarah Nadi's tictactoe need proper citation
 	// currently unused
     public void promptNextPlayer(){
-        switch(0){
-            case 1:
-                System.out.println("It's player 1's turn. Take another card? [y/n] ");
-                break;
-            case 2:
-                System.out.println("It's player 2's turn. Take another card? [y/n] ");
-                break;
-
-        }
-}
+        if (this.currentPlayer == player1) {
+			System.out.println("It's player 1's turn. Take another card? [y/n] ");
+		}
+		else if (this.currentPlayer == player2) {
+			System.out.println("It's player 2's turn. Take another card? [y/n] ");
+		}
+	}
 	
 	public void end(){
 		
 	}
 	
 	// Displays current state of the game
-	public void print(){
-		
+	public void printStatus(){
+		String p1Str = "Player 1 has " 
+			+ this.player1.getHand().getScore()
+			+ " in their hand.";
+		String p2Str = "Player 2 has " 
+			+ this.player2.getHand().getScore()
+			+ " in their hand." ;
+
+		System.out.println(p1Str);
+		System.out.println(p2Str);
 	}
 	
 	public boolean dealer(String input, Player currentPlayer) throws InvalidInputException{
@@ -107,24 +112,28 @@ public class Game {
 	}
 	
 	
-	// Unfinished, idea is to let 
 	public void playRound(){
 		Scanner keyboardScanner = new Scanner(System.in);
 		String resp = null;
-		print();
-
-		// player 1's turn
 		while(resp != "n"){
-			System.out.println("Player1, Take another card? [y/n] ");
+			printStatus();
+			promptNextPlayer();
 			String line = keyboardScanner.nextLine();
 
 			try {
-				boolean stay = dealer(line, this.player1);
+				boolean stay = dealer(line, this.currentPlayer);
 				if(!stay){
 					break;
 				}
 				if (this.player1.getHand().getScore() > 21) {
-					System.out.println("Player 1 is above 21. Player 1 wins!");
+					Player p = null;
+					if (this.currentPlayer == player1) {
+						p = player2;
+					}
+					else if (this.currentPlayer == player2) {
+						p = player1;
+					}					
+					this.winner = p;
 					break;
 				}
 			}
@@ -133,28 +142,7 @@ public class Game {
 				System.out.println("Error: invalid input.");
 			}
 		}
-		resp = null;
-		// player 2's turn
-		while(resp != "n"){
-			System.out.println("Player2, Take another card? [y/n] ");
-			String line = keyboardScanner.nextLine();
-			try {
-				boolean stay = dealer(line, this.player2);
-				if(!stay){
-					break;
-				}
-				if (this.player2.getHand().getScore() > 21) {
-					System.out.println("Player 2 is above 21. Player 1 wins!");
-					break;
-				}
-			}
-			catch (InvalidInputException e) {
-				System.out.println("Error: invalid input.");
-			}
-		}
-
-
-		// find out who has a higher hand < 21
+		this.currentPlayer = (this.currentPlayer == player1 ? player2 : player1);
 	}
 
     public static void main(String args[]){
@@ -175,6 +163,17 @@ public class Game {
 
 		Game game = new Game(deck, player1, player2);
 
-		game.playRound();
+		while (game.getWinner() == null) {
+			game.playRound();
+		};
+		Player winner = game.getWinner();
+		int winNum = 0;
+		if (winner == player1) {
+			winNum = 1;
+		}
+		else if (winner == player2) {
+			winNum = 2;
+		}
+		System.out.println("Player " + winNum + " wins!");
 	}
 }
