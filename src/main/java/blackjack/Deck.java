@@ -1,6 +1,7 @@
 package blackjack;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck {
 
@@ -20,6 +21,33 @@ public class Deck {
 				this.cards.add(new Card(suit,value));
 		}
 	
+	}
+	
+	public void shuffleDeck() {
+		ArrayList<Card> shuffledDeck = new ArrayList<Card>();
+		// Generate random numbers
+		Random random = new Random();
+		int randomCard = 0;
+		int deckSize = fulldeckSize();
+		for(int i = 0; i < deckSize; i++) {
+			randomCard = random.nextInt(deckSize) + 1;
+			shuffledDeck.add(this.cards.get(randomCard));
+			this.cards.remove(randomCard);
+		}
+		this.cards = shuffledDeck;
+		
+	}
+	
+	
+	public String toString() {
+		
+		String cardlist = "";
+		int i = 0;
+		for(Card card: this.cards) {
+			cardlist += "\n" + i + "-" + card.toString();
+			i++;
+		}
+		return cardlist;
 	}
 	
 	// Returns the full deck size = 52	
