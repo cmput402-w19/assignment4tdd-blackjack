@@ -63,5 +63,19 @@ public class HandTest extends TestCase {
 		
 		assertEquals(hand3.getCards(), cards3);
 	}
+	
+	public void testAddCard(){
+		
+		Card card = new Card(Suit.SPADE, Value.KING);
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(card1);
+		cards.add(card4);
+		
+		hand1.addCard(card4);
+		assertEquals(cards, hand1.getCards());
+		
+		
+		
+	}
 
 }

@@ -61,4 +61,8 @@ public class Hand {
 		return this.cards;
 	}
 	
+	public void addCard(Card card){
+		
+	}
+	
 }
