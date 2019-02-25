@@ -210,6 +210,98 @@ public class GameTest extends TestCase {
 		assertSame(player1, game.getCurrentPlayer());
 	}
 
+	@Test
+	public void testDoTurnForPlayer1Lose() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+
+		// player 1 will have a score of 22 (>21), and thus
+		// the other player wins the game
+		when(h1.getScore()).thenReturn(22);
+
+		assertFalse(game.doTurn("y"));
+	}
+
+	@Test
+	public void testDoTurnForPlayer2Lose() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.setCurrentPlayer(player2);
+
+		// player 2 will have a score of 22 (>21), and thus
+		// the other player wins the game
+		when(h2.getScore()).thenReturn(22);
+		
+		assertFalse(game.doTurn("y"));
+	}
+
+	@Test
+	public void testDoTurnForPlayer2NoWinner() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.setCurrentPlayer(player2);
+
+		// player 2 will have a score of 1 (<21), and thus
+		// there is no winner and the player can
+		// draw again
+		when(h2.getScore()).thenReturn(1);
+
+		assertTrue(game.doTurn("y"));
+	}
+
+	@Test
+	public void testDoTurnForPlayer1NoWinner() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+
+		game.setCurrentPlayer(player1);
+
+		// player 1 will have a score of 1 (<21), and thus
+		// there is no winner and the player can
+		// draw again
+		when(h1.getScore()).thenReturn(1);
+
+		assertTrue(game.doTurn("y"));
+
+	}
+
+	@Test
+	public void testDoTurnForPlayer1Pass() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.setCurrentPlayer(player1);
+
+		when(h1.getScore()).thenReturn(1);
+
+		assertFalse(game.doTurn("n"));
+
+	}
+
+	@Test
+	public void testDoTurnForPlayer2Pass() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.setCurrentPlayer(player2);
+
+		when(h2.getScore()).thenReturn(1);
+
+		assertFalse(game.doTurn("n"));
+
+	}
+
+
+
+
 	
 }
 
