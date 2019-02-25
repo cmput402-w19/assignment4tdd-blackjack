@@ -201,6 +201,15 @@ public class GameTest extends TestCase {
 		assertSame(player2, game.getCurrentPlayer());
 	}
 
+	@Test
+	public void testNextPlayerWhenCurrentIs2() {
+		game.setCurrentPlayer(player2);
+
+		game.nextPlayer();
+
+		assertSame(player1, game.getCurrentPlayer());
+	}
+
 	
 }
 
