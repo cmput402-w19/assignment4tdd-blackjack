@@ -14,8 +14,19 @@ public class CardTest extends TestCase {
 		
 		Card card3 = new Card(Suit.CLUB, Value.EIGHT);
 		Card card4 = new Card(Suit.SPADE, Value.KING);
+		
 		assertNotEquals(card3,card4);
 		
+		Card card5 = new Card(Suit.CLUB, Value.EIGHT);
+		assertEquals(card5.getSuit(), Suit.CLUB);
+		assertNotEquals(card5.getSuit(), Suit.DIAMOND);
+		assertEquals(card5.getValue(), Value.EIGHT);
+		assertNotEquals(card5.getValue(), Value.NINE);
+		
+		Card aCard = new Card(Suit.CLUB, Value.EIGHT);
+		Card aCard2 = null;
+		assertTrue(aCard instanceof Card);
+		assertFalse(aCard2 instanceof Card);
 	}
 	
 	public void testGetScore(){
