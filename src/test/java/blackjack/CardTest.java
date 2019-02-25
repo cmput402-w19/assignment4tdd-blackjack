@@ -5,6 +5,12 @@ import junit.framework.TestCase;
 //spades, hearts, clubs, diamonds
 public class CardTest extends TestCase {
 	
+	public void testEquals(){
+		Card card1 = new Card(Suit.SPADE, Value.KING);
+		Card card2 = new Card(Suit.SPADE, Value.KING);
+		assertEquals(card1, card2);
+	}
+	
 	public void testGetScore(){
 		Card card = new Card(Suit.SPADE, Value.KING);
 		assertEquals(Suit.SPADE, card.getSuit());
