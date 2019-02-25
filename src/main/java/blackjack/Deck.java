@@ -14,21 +14,26 @@ public class Deck {
 	
 	public void createDeck() {
 		//Generate Cards		
-		String value = null;
-		String suite = null;
-		this.cards.add(new Card(value, suite));
+		for(Suit suit: Suit.values()) {
+			for(Value value: Value.values())
+				//Add cards to the deck
+				this.cards.add(new Card(suit,value));
+		}
+	
 	}
 	
-	public int deckSize() {
+	// Returns the full deck size = 52	
+	public int fulldeckSize() {
 		return cards.size();
 	}
 	
-//	public boolean deckContainsCards(String value, String suite) {
-//		for (Card card: cards) {
-//			if (value == card.value && suite == card.suite)
-//				return true;
-//		}
-//		return false;
-//	}
+	// Check if deck contains cards	
+	public boolean deckContainsCards(Suit suit, Value value) {
+		for (Card card: cards) {
+			if (value == card.getValue() && suit == card.getSuit())
+				return true;
+		}
+		return false;
+	}
 		   
 }

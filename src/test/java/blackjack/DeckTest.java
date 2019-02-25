@@ -11,7 +11,13 @@ public class DeckTest {
 	public void testCreateDeck() {
 		Deck deck = new Deck();
 		deck.createDeck();
-		assertEquals(deck.deckSize(),52);
+		assertEquals(deck.fulldeckSize(),52);
+		for (Suit suit: Suit.values()) {
+			for (Value value: Value.values()) {
+				assertTrue(deck.deckContainsCards(suit, value));
+				
+			}		
+		}		
 	}
-
+	
 }
