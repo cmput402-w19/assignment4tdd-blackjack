@@ -89,7 +89,8 @@ public class Game {
 		System.out.println(p2Str);
 	}
 	
-	public boolean dealer(String input, Player currentPlayer) throws InvalidInputException{
+	// Deals cards to current player for as long as they keep asking
+	public boolean deal(String input, Player currentPlayer) throws InvalidInputException{
 		if(input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes")){
 			// Give current player another card
 			Card card = deck.draw();
@@ -101,7 +102,7 @@ public class Game {
 			return false;
 			
 		}else{
-			throw new InvalidInputException("Temporary text");
+			throw new InvalidInputException("Invalid input!");
 		}
 	}
 

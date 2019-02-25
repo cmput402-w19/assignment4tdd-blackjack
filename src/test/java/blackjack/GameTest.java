@@ -121,7 +121,7 @@ public class GameTest extends TestCase {
 		boolean b;
 		when(deck.draw()).thenReturn(mock(Card.class));
 		try {
-			b = game.dealer("y", player1);
+			b = game.deal("y", player1);
 			assertEquals(true, b);
 		}
 		catch (Exception e) {
@@ -135,7 +135,7 @@ public class GameTest extends TestCase {
 		boolean b;
 		when(deck.draw()).thenReturn(mock(Card.class));
 		try {
-			b = game.dealer("n", player1);
+			b = game.deal("n", player1);
 			assertEquals(false, b);
 		}
 		catch (Exception e) {
