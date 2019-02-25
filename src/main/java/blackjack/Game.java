@@ -74,12 +74,12 @@ public class Game {
 	
 	// Displays current state of the game
 	public void printStatus(){
-		String p1Str = "Player 1 has " 
+		String p1Str = "Player 1's hand has " 
 			+ this.player1.getHand().getScore()
-			+ " in their hand.";
-		String p2Str = "Player 2 has " 
+			+ ".";
+		String p2Str = "Player 2's hand has " 
 			+ this.player2.getHand().getScore()
-			+ " in their hand." ;
+			+ ".\n" ;
 
 		System.out.println(p1Str);
 		System.out.println(p2Str);
