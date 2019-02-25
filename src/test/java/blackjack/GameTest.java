@@ -366,6 +366,31 @@ public class GameTest extends TestCase {
 	}
 
 	@Test
+	public void testPlayRoundGameEnd() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+		when(h1.getScore()).thenReturn(2);
+		when(h2.getScore()).thenReturn(1);
+		game.setCurrentPlayer(player2);
+
+
+		String input = "n\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		game.playRound();
+
+		// check that at the end of a game, 
+		// (i.e. nextPlayer looped back to player 1), 
+		// a winner sone chosen
+		assertNotNull(game.getWinner());
+		assertEquals(player1, game.getWinner());
+
+	}
+
+	@Test
 	public void testCalculateWinnerPlayer1Wins() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
