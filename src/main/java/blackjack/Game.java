@@ -145,6 +145,11 @@ public class Game {
 			repeat = doTurn(line);
 		}
 		nextPlayer();
+
+		// if looped back to player 1, then everyone has had their turn, so end this game
+		if(this.currentPlayer == player1) {
+			calculateWinner();
+		};
 	}
 
 	public void nextPlayer() {
@@ -185,14 +190,7 @@ public class Game {
 		Game game = new Game(deck, player1, player2);
 
 		while (game.getWinner() == null) {
-			Scanner keyboardScanner = new Scanner(System.in);
 			game.playRound();
-
-			// if looped back to player 1, then everyone has had their turn, so end this game
-			if(game.currentPlayer == player1) break;
 		};
-
-		// if no from one player going over, then calculate
-		game.calculateWinner();
 	}
 }
