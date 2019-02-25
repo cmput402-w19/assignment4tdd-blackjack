@@ -12,10 +12,14 @@ public class HandTest extends TestCase {
 	
 	ArrayList<Card> cards1;
 	ArrayList<Card> cards3;
+	ArrayList<Card> cards4;
 	
 	Hand hand1;
 	Hand hand2;
 	Hand hand3;
+	Hand hand4 =null;
+	
+	Hand hand5;
 	
 	public void setUp(){
 		card1 = new Card(Suit.SPADE, Value.KING);
@@ -33,21 +37,31 @@ public class HandTest extends TestCase {
 		cards3.add(card6);
 		hand3 = new Hand(cards3);
 		
+		cards4 = new ArrayList<Card>();
+		for(Suit suit: Suit.values()) {
+			for(Value value: Value.values()) {
+				// Add cards to a list
+				cards4.add(new Card(suit,value));
+			}
+		}
+		hand5 = new Hand(cards4);	
+		
+			
 	}
 	
 	public void testEquals(){
 		
 		assertEquals(hand1, hand2);
 		assertFalse(hand1.equals(hand3));
+		assertTrue(hand1 instanceof Hand);
+		assertFalse(hand4 instanceof Hand);
 		
 	}
 	
 	public void testGetScore(){
-		
 		assertEquals(hand1.getScore(), 10);
-		
 		assertEquals(hand3.getScore(), 20);
-		
+		assertEquals(hand5.getScore(), 340);
 	}
 	
 	public void testGetCount(){
