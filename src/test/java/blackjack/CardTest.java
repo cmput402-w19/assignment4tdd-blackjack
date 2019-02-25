@@ -1,5 +1,7 @@
 package blackjack;
 
+import static org.junit.Assert.assertNotEquals;
+
 import junit.framework.TestCase;
 
 //spades, hearts, clubs, diamonds
@@ -9,6 +11,27 @@ public class CardTest extends TestCase {
 		Card card1 = new Card(Suit.SPADE, Value.KING);
 		Card card2 = new Card(Suit.SPADE, Value.KING);
 		assertEquals(card1, card2);
+		
+		Card card3 = new Card(Suit.CLUB, Value.EIGHT);
+		Card card4 = new Card(Suit.SPADE, Value.KING);
+		
+		assertNotEquals(card3,card4);
+		
+		Card card5 = new Card(Suit.CLUB, Value.EIGHT);
+		assertEquals(card5.getSuit(), Suit.CLUB);
+		assertNotEquals(card5.getSuit(), Suit.DIAMOND);
+		assertEquals(card5.getValue(), Value.EIGHT);
+		assertNotEquals(card5.getValue(), Value.NINE);
+		
+		Card card6 = new Card(Suit.CLUB, Value.TEN);
+		Card card7 = new Card(Suit.CLUB, Value.ACE);
+		
+		assertNotEquals(card6, card7);
+		
+		Card aCard = new Card(Suit.CLUB, Value.EIGHT);
+		Card aCard2 = null;
+		assertTrue(aCard instanceof Card);
+		assertFalse(aCard2 instanceof Card);
 	}
 	
 	public void testGetScore(){
