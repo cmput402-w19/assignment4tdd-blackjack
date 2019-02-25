@@ -63,9 +63,10 @@ public class Deck {
 	}
 	
 	// Draws a card from the deck	
-	public void draw(Deck aDeck){
-		this.cards.add(aDeck.getCard(0));
-		aDeck.removeCard(0);			
+	public Card draw(){
+		Card card = getCard(0);
+		removeCard(0);	
+		return card;
 	}
 		
 	

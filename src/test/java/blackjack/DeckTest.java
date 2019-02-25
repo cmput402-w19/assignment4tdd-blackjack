@@ -38,17 +38,18 @@ public class DeckTest {
 	
 	@Test
 	public void testDraw() {
-		Deck playingDeck = new Deck();
-		playingDeck.createDeck();
-		
 		Deck aDeck = new Deck();
 		aDeck.createDeck();
 		
-		aDeck.draw(playingDeck);
-		aDeck.draw(playingDeck);
-		aDeck.draw(playingDeck);
+		Card card1 = aDeck.getCard(0);
+		Card card2 = aDeck.getCard(1);
+		Card card3 = aDeck.getCard(2);
 		
-		assertNotEquals(aDeck.deckSize(), 51);
+		assertEquals(aDeck.draw(), card1);
+		assertEquals(aDeck.draw(), card2);
+		assertEquals(aDeck.draw(), card3);
+		
+		assertEquals(aDeck.deckSize(), 49);
 		
 		
 	}
