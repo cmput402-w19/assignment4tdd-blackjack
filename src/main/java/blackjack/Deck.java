@@ -30,12 +30,11 @@ public class Deck {
 		int randomCard = 0;
 		int deckSize = fulldeckSize();
 		for(int i = 0; i < deckSize; i++) {
-			randomCard = random.nextInt(deckSize) + 1;
+			randomCard = random.nextInt((this.cards.size() - 1 - 0) + 1) + 0;
 			shuffledDeck.add(this.cards.get(randomCard));
 			this.cards.remove(randomCard);
 		}
-		this.cards = shuffledDeck;
-		
+		this.cards = shuffledDeck;	
 	}
 	
 	
@@ -52,7 +51,7 @@ public class Deck {
 	
 	// Returns the full deck size = 52	
 	public int fulldeckSize() {
-		return cards.size();
+		return this.cards.size();
 	}
 	
 	// Check if deck contains cards	

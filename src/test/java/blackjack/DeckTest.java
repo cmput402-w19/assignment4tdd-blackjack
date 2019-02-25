@@ -27,13 +27,14 @@ public class DeckTest {
 		Deck originalDeck = new Deck();
 		originalDeck.createDeck();
 
-		Deck shuffleDeck = new Deck();
-		shuffleDeck.createDeck();
+		Deck shuffledDeck = new Deck();
+		shuffledDeck.createDeck();
 		
-		assertTrue(originalDeck.toString().equals(shuffleDeck.toString()));
+		assertTrue(originalDeck.toString().equals(shuffledDeck.toString()));
 		
-		shuffleDeck.shuffleDeck();
-		assertFalse(originalDeck.toString().equals(shuffleDeck.toString()));
+		shuffledDeck.shuffleDeck();
+		System.out.println(shuffledDeck);
+		assertFalse(originalDeck.toString().equals(shuffledDeck.toString()));
 		
 		
 	}
