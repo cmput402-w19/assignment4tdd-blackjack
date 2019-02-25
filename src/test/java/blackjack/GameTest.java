@@ -11,6 +11,8 @@ public class GameTest extends TestCase {
 	Player player1;
 	Player player2;
 	Deck deck;
+	Player currentPlayer;
+	Player winner;
 	
 	@Before
 	public void setUp(){
@@ -53,29 +55,55 @@ public class GameTest extends TestCase {
 	
 	@Test
 	public void testGetPlayer1(){
-		Player newPlayer = mock(Player.class);
-		game.setPlayer1(newPlayer);
+		Player p = game.getPlayer1();
 		
-		assertSame(newPlayer, game.getPlayer1());
+		assertSame(player1, p);
 	}
 	
 	@Test
 	public void testGetPlayer2(){
-		Player newPlayer = mock(Player.class);
-		game.setPlayer2(newPlayer);
+		Player p = game.getPlayer2();
 		
-		assertSame(newPlayer, game.getPlayer2());
+		assertSame(player2, p);
 	}
 
 	@Test
 	public void testGetDeck(){
-		Deck deck = new Deck();
-		deck.createDeck();
-		deck.shuffleDeck();
+		Deck d = game.getDeck();
 		
-		game.setDeck(deck);
+		assertSame(deck, d);
+	}
+
+	@Test
+	public void testSetCurrentPlayer(){
+		Player p = mock(Player.class);
+		game.setCurrentPlayer(p);
 		
-		assertSame(deck, game.getDeck());
+		assertSame(p, game.getCurrentPlayer());
+	}
+
+	@Test
+	public void testGetCurrentPlayer(){
+		Player p = mock(Player.class);
+		game.setCurrentPlayer(p);
+		
+		assertSame(p, game.getCurrentPlayer());
+	}
+
+	@Test
+	public void testSetWinner(){
+		Player p = mock(Player.class);
+		game.setWinner(p);
+		
+		assertSame(p, game.getWinner());
+	}
+
+	@Test
+	public void testGetWinner(){
+		Player p = mock(Player.class);
+		game.setWinner(p);
+		
+		assertSame(p, game.getWinner());
 	}
 	
 }
