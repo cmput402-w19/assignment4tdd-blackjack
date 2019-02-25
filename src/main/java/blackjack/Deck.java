@@ -71,7 +71,18 @@ public class Deck {
 	
 	public ArrayList<ArrayList<Card>> dealCards(){
 		ArrayList<ArrayList<Card>> cardsLists = new ArrayList<ArrayList<Card>>();
-		return null;
+		ArrayList<Card> cards1 = new ArrayList<Card>();
+		ArrayList<Card> cards2 = new ArrayList<Card>();
+		
+		cards1.add(draw());
+		cards2.add(draw());
+		cards1.add(draw());
+		cards2.add(draw());
+		
+		cardsLists.add(cards1);
+		cardsLists.add(cards2);
+		
+		return cardsLists;
 	}	
 	
 	// Returns the full deck size = 52	
