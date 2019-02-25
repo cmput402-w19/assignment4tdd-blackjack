@@ -107,37 +107,47 @@ public class Game {
 		System.out.println("hello");
 		
 	}
+
+	// true: can draw again
+	// false: unable to draw again
+	public boolean doTurn(String line) {
+		try {
+			boolean stay = deal(line, this.currentPlayer);
+			if(!stay){
+				return false;
+			}
+			if (this.currentPlayer.getHand().getScore() > 21) {
+				Player p = null;
+				if (this.currentPlayer == player1) {
+					p = player2;
+				}
+				else {
+					p = player1;
+				}					
+				this.winner = p;
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		
+		catch (InvalidInputException e) {
+			System.out.println("Error: invalid input.");
+			return true;
+		}
+	}
 	
 	
-	public void playRound(){
+	public void playRound() {
 		Scanner keyboardScanner = new Scanner(System.in);
 		String resp = null;
-		while(resp != "n"){
+		boolean repeat = true;
+		while(repeat) {
 			printStatus();
 			promptNextPlayer();
 			String line = keyboardScanner.nextLine();
-
-			try {
-				boolean stay = deal(line, this.currentPlayer);
-				if(!stay){
-					break;
-				}
-				if (this.player1.getHand().getScore() > 21) {
-					Player p = null;
-					if (this.currentPlayer == player1) {
-						p = player2;
-					}
-					else if (this.currentPlayer == player2) {
-						p = player1;
-					}					
-					this.winner = p;
-					break;
-				}
-			}
-			
-			catch (InvalidInputException e) {
-				System.out.println("Error: invalid input.");
-			}
+			repeat = doTurn(line);
 		}
 	}
 
@@ -168,7 +178,10 @@ public class Game {
 		Game game = new Game(deck, player1, player2);
 
 		while (game.getWinner() == null) {
+			Scanner keyboardScanner = new Scanner(System.in);
+			String resp = null;
 			game.playRound();
+			game.nextPlayer();
 		};
 		Player winner = game.getWinner();
 		int winNum = 0;
