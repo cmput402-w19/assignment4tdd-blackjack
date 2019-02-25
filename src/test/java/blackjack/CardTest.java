@@ -29,9 +29,9 @@ public class CardTest extends TestCase {
 		assertNotEquals(card6, card7);
 		
 		Card aCard = new Card(Suit.CLUB, Value.EIGHT);
-		Card aCard2 = null;
-		assertTrue(aCard instanceof Card);
-		assertFalse(aCard2 instanceof Card);
+		assertTrue(aCard.equals(aCard));
+		assertFalse(aCard.equals(1));
+		
 	}
 	
 	public void testGetScore(){
