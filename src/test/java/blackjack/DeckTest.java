@@ -2,6 +2,8 @@ package blackjack;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class DeckTest {
@@ -50,8 +52,29 @@ public class DeckTest {
 		assertEquals(aDeck.draw(), card3);
 		
 		assertEquals(aDeck.deckSize(), 49);
+			
+	}
+	
+	@Test
+	public void testDealCards(){
+		Deck aDeck = new Deck();
+		aDeck.createDeck();
 		
+		ArrayList<Card> cards1 = new ArrayList<Card>();
+		ArrayList<Card> cards2 = new ArrayList<Card>();
 		
+		cards1.add(aDeck.getCard(0));
+		cards1.add(aDeck.getCard(2));
+		
+		cards2.add(aDeck.getCard(1));
+		cards2.add(aDeck.getCard(3));
+		
+		ArrayList<ArrayList<Card>> cardsLists = new ArrayList<ArrayList<Card>>();
+		cardsLists = aDeck.dealCards();
+				
+		assertEquals(cardsLists.get(0), cards1);
+		assertEquals(cardsLists.get(1), cards2);
+				
 	}
 
 }

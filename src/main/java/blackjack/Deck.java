@@ -68,7 +68,11 @@ public class Deck {
 		removeCard(0);	
 		return card;
 	}
-		
+	
+	public ArrayList<ArrayList<Card>> dealCards(){
+		ArrayList<ArrayList<Card>> cardsLists = new ArrayList<ArrayList<Card>>();
+		return null;
+	}	
 	
 	// Returns the full deck size = 52	
 	public int deckSize() {
