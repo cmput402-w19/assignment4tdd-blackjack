@@ -17,6 +17,9 @@ public class Game {
 		this.deck = deck;
 		this.player1 = player1;
 		this.player2 = player2;
+
+		this.currentPlayer = player1;
+		this.winner = null;
 	}
 	
 	public Player getPlayer1(){
