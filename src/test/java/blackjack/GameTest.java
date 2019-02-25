@@ -138,7 +138,7 @@ public class GameTest extends TestCase {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
-		when(player1.getHand()).thenReturn(h2);
+		when(player2.getHand()).thenReturn(h2);
 
 		try {
 			b = game.deal("y", player1);
@@ -180,5 +180,20 @@ public class GameTest extends TestCase {
 
 		assertEquals("It is player 2's turn. Take another card? [y/n] \n", outContent.toString());
 	}
+
+	@Test
+	public void testPrintStatus() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		game.printStatus();
+
+		// starting with 0 scores
+		assertEquals("Player 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
+	}
+
+	
 }
 
