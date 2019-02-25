@@ -2,8 +2,6 @@ package blackjack;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 public class DeckTest {
@@ -13,7 +11,7 @@ public class DeckTest {
 	public void testCreateDeck() {
 		Deck deck = new Deck();
 		deck.createDeck();
-		assertEquals(deck.fulldeckSize(),52);
+		assertEquals(deck.deckSize(),52);
 		for (Suit suit: Suit.values()) {
 			for (Value value: Value.values()) {
 				assertTrue(deck.deckContainsCards(suit, value));
@@ -33,8 +31,24 @@ public class DeckTest {
 		assertTrue(originalDeck.toString().equals(shuffledDeck.toString()));
 		
 		shuffledDeck.shuffleDeck();
-		System.out.println(shuffledDeck);
 		assertFalse(originalDeck.toString().equals(shuffledDeck.toString()));
+		
+		
+	}
+	
+	@Test
+	public void testDraw() {
+		Deck playingDeck = new Deck();
+		playingDeck.createDeck();
+		
+		Deck aDeck = new Deck();
+		aDeck.createDeck();
+		
+		aDeck.draw(playingDeck);
+		aDeck.draw(playingDeck);
+		aDeck.draw(playingDeck);
+		
+		assertNotEquals(aDeck.deckSize(), 51);
 		
 		
 	}

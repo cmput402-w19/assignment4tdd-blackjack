@@ -28,7 +28,7 @@ public class Deck {
 		// Generate random numbers
 		Random random = new Random();
 		int randomCard = 0;
-		int deckSize = fulldeckSize();
+		int deckSize = deckSize();
 		for(int i = 0; i < deckSize; i++) {
 			randomCard = random.nextInt((this.cards.size() - 1 - 0) + 1) + 0;
 			shuffledDeck.add(this.cards.get(randomCard));
@@ -38,6 +38,7 @@ public class Deck {
 	}
 	
 	
+	// Returns a string with contents in the deck	
 	public String toString() {
 		
 		String cardlist = "";
@@ -49,8 +50,27 @@ public class Deck {
 		return cardlist;
 	}
 	
+	// Remove from the deck
+	// Remove the index from deck	
+	public void removeCard(int i) {
+		this.cards.remove(i);
+	}
+	
+	// Get a card form the deck
+	// Add a card to the index of the deck	
+	public Card getCard(int i) {
+		return this.cards.get(i);
+	}
+	
+	// Draws a card from the deck	
+	public void draw(Deck aDeck){
+		this.cards.add(aDeck.getCard(0));
+		aDeck.removeCard(0);			
+	}
+		
+	
 	// Returns the full deck size = 52	
-	public int fulldeckSize() {
+	public int deckSize() {
 		return this.cards.size();
 	}
 	
