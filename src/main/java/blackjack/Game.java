@@ -65,15 +65,11 @@ public class Game {
 	// currently unused
     public void promptNextPlayer(){
         if (this.currentPlayer == player1) {
-			System.out.println("It's player 1's turn. Take another card? [y/n] ");
+			System.out.println("It is player 1's turn. Take another card? [y/n] ");
 		}
 		else if (this.currentPlayer == player2) {
-			System.out.println("It's player 2's turn. Take another card? [y/n] ");
+			System.out.println("It is player 2's turn. Take another card? [y/n] ");
 		}
-	}
-	
-	public void end(){
-		
 	}
 	
 	// Displays current state of the game
@@ -122,7 +118,7 @@ public class Game {
 			String line = keyboardScanner.nextLine();
 
 			try {
-				boolean stay = dealer(line, this.currentPlayer);
+				boolean stay = deal(line, this.currentPlayer);
 				if(!stay){
 					break;
 				}
@@ -147,6 +143,8 @@ public class Game {
 	}
 
     public static void main(String args[]){
+
+		// setup
 		Deck deck = new Deck();
 		Player player1;
 		Player player2;

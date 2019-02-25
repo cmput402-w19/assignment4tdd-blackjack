@@ -169,7 +169,7 @@ public class GameTest extends TestCase {
 	public void testPromptNextPlayer1() {
 		game.promptNextPlayer();
 
-		assertEquals("It is player 1's turn. Take another card? [y/n]", outContent.toString());
+		assertEquals("It is player 1's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 
 	@Test
@@ -178,7 +178,7 @@ public class GameTest extends TestCase {
 
 		game.promptNextPlayer();
 
-		assertEquals("It is player 2's turn. Take another card? [y/n]", outContent.toString());
+		assertEquals("It is player 2's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 }
 
