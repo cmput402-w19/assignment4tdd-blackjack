@@ -106,5 +106,14 @@ public class GameTest extends TestCase {
 		assertSame(p, game.getWinner());
 	}
 	
+	@Test
+	public void testPlayer1Starts() {
+		assertEquals(game.getCurrentPlayer(), player1);
+	}
+
+	@Test
+	public void testNoWinnerAtStart() {
+		assertEquals(game.getWinner(), null);
+	}
 }
 
