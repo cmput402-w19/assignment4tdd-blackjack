@@ -10,6 +10,9 @@ public class Game {
 	private Player player1;
 	private Player player2;
 
+	private Player currentPlayer;
+	private Player winner;
+
 	public Game(Deck deck, Player player1, Player player2) {
 		this.deck = deck;
 		this.player1 = player1;
@@ -29,11 +32,11 @@ public class Game {
 	}
 
 	public Player getCurrentPlayer(){
-		return null;
+		return this.currentPlayer;
 	}
 
-	public int getCurrentPlayerNum(){
-		return 0;
+	public Player getWinner() {
+		return this.winner;
 	}
 	
 	public void setDeck(Deck deck) {
@@ -49,12 +52,16 @@ public class Game {
 	}
 
 	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player;
+	}
+	public void setWinner(Player player) {
+		this.winner = player;
 	}
 
 	// Code taken from Sarah Nadi's tictactoe need proper citation
 	// currently unused
     public void promptNextPlayer(){
-        switch(getCurrentPlayerNum()){
+        switch(0){
             case 1:
                 System.out.println("It's player 1's turn. Take another card? [y/n] ");
                 break;
@@ -92,6 +99,7 @@ public class Game {
 
 	// Keep playing rounds when user enters desired input
 	public void play(){
+		System.out.println("hello");
 		
 	}
 	
@@ -99,44 +107,51 @@ public class Game {
 	// Unfinished, idea is to let 
 	public void playRound(){
 		Scanner keyboardScanner = new Scanner(System.in);
+		String resp = null;
 		print();
-		while(getPlayer1().getHand().getScore() < 21){
+
+		// player 1's turn
+		while(resp != "n"){
 			System.out.println("Player1, Take another card? [y/n] ");
 			String line = keyboardScanner.nextLine();
 
 			try {
-				boolean stay = dealer(line, getPlayer1());
+				boolean stay = dealer(line, this.player1);
 				if(!stay){
 					break;
 				}
+				if (this.player1.getHand().getScore() > 21) {
+					System.out.println("Player 1 is above 21. Player 1 wins!");
+					break;
+				}
 			}
+			
 			catch (InvalidInputException e) {
 				System.out.println("Error: invalid input.");
-				break;
 			}
 		}
-		// If player over 21, they lose
-		while(getPlayer2().getHand().getScore() < 21){
+		resp = null;
+		// player 2's turn
+		while(resp != "n"){
 			System.out.println("Player2, Take another card? [y/n] ");
 			String line = keyboardScanner.nextLine();
 			try {
-				boolean stay = dealer(line, getPlayer2());
+				boolean stay = dealer(line, this.player2);
 				if(!stay){
+					break;
+				}
+				if (this.player2.getHand().getScore() > 21) {
+					System.out.println("Player 2 is above 21. Player 1 wins!");
 					break;
 				}
 			}
 			catch (InvalidInputException e) {
 				System.out.println("Error: invalid input.");
-				break;
 			}
 		}
-		// If player over 21, they lose
-		
-		// else{
-		// 	// Player with highest score wins the round
-		// }
-		
-		
+
+
+		// find out who has a higher hand < 21
 	}
 
     public static void main(String args[]){
@@ -144,6 +159,8 @@ public class Game {
 		Player player1;
 		Player player2;
 		
+		deck.createDeck();
+		deck.shuffleDeck();
 		ArrayList<ArrayList<Card>> cardsList = new ArrayList<ArrayList<Card>>();
 		cardsList = deck.dealCards();
 		
@@ -155,6 +172,6 @@ public class Game {
 
 		Game game = new Game(deck, player1, player2);
 
-		game.play();
+		game.playRound();
 	}
 }
