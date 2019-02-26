@@ -17,3 +17,8 @@ Blackjack
 
 ### Run Instructions:
 
+After building, and from the root of the project directory:
+1. `java -jar target/assignment4tdd-blackjack-0.0.1-SNAPSHOT.jar`
+
+NOTE: the created .jar file might be differently named. See the name of the jar file under /target/
+
