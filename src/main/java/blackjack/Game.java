@@ -2,6 +2,7 @@ package blackjack;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Game {
 	
@@ -85,7 +86,7 @@ public class Game {
 	
 	// Displays current state of the game
 	public void printStatus(){
-		String p1Str = "Player 1's hand has " 
+		String p1Str = "\nPlayer 1's hand has " 
 			+ this.player1.getHand().getScore()
 			+ ".";
 		String p2Str = "Player 2's hand has " 
@@ -101,6 +102,9 @@ public class Game {
 		if(input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes")){
 			// Give current player another card
 			Card card = deck.draw();
+			String[] a = card.toString().split(":");
+
+			System.out.println("You drew a " + a[1] + " of " + a[0]);
 			currentPlayer.getHand().addCard(card);
 			return true;
 		}
@@ -188,7 +192,8 @@ public class Game {
 
 	public void calculateWinner() {
 		if (this.winner != null) {
-			System.out.println("Player " + getWinnerNum() + " wins!");
+			System.out.println("\n\n\nPlayer " + getWinnerNum() + " wins!");
+			printStatus();
 			return;	
 		}
 		else {
@@ -203,7 +208,8 @@ public class Game {
 			else {
 				winner = player2;
 			}
-			System.out.println("Player " + getWinnerNum() + " wins!");	
+			System.out.println("\n\n\nPlayer " + getWinnerNum() + " wins!");	
+			printStatus();
 		}
 	}
 

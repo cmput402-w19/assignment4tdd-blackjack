@@ -205,7 +205,7 @@ public class GameTest extends TestCase {
 		game.printStatus();
 
 		// starting with 0 scores
-		assertEquals("Player 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
+		assertEquals("\nPlayer 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
 	}
 
 	@Test
@@ -230,6 +230,9 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
+
 		// player 1 will have a score of 22 (>21), and thus
 		// the other player wins the game
 		when(h1.getScore()).thenReturn(22);
@@ -242,6 +245,9 @@ public class GameTest extends TestCase {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player2.getHand()).thenReturn(h2);
+
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
 
 		game.setCurrentPlayer(player2);
 
@@ -258,6 +264,9 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player2.getHand()).thenReturn(h2);
 
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
+
 		game.setCurrentPlayer(player2);
 
 		// player 2 will have a score of 1 (<21), and thus
@@ -273,6 +282,9 @@ public class GameTest extends TestCase {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
+
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
 
 		game.setCurrentPlayer(player1);
 
