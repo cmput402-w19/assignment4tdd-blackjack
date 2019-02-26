@@ -180,7 +180,12 @@ public class Game {
 	}
 
 	public void calculateWinner() {
-		if (player1.getHand().getScore() > player2.getHand().getScore()) {
+		if (player1.getHand().getScore() == player2.getHand().getScore()) {
+			this.draw = true;
+			System.out.println("Draw game!");	
+			return;
+		}
+		else if (player1.getHand().getScore() > player2.getHand().getScore()) {
 			winner = player1; 
 		}
 		else {
