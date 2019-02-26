@@ -183,7 +183,7 @@ public class GameTest extends TestCase {
 	public void testPromptNextPlayer1() {
 		game.promptNextPlayer();
 
-		assertEquals("It is player 1's turn. Take another card? [y/n] \n", outContent.toString());
+		assertEquals("\nIt is player 1's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 
 	@Test
@@ -192,7 +192,7 @@ public class GameTest extends TestCase {
 
 		game.promptNextPlayer();
 
-		assertEquals("It is player 2's turn. Take another card? [y/n] \n", outContent.toString());
+		assertEquals("\nIt is player 2's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 
 	@Test
@@ -201,11 +201,12 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 		when(player2.getHand()).thenReturn(h2);
-
+		when(h1.toString()).thenReturn("a");
+		when(h2.toString()).thenReturn("a");
 		game.printStatus();
 
 		// starting with 0 scores
-		assertEquals("\nPlayer 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
+		assertEquals("\nPlayer 1's hand has 0.\nPlayer 1's hand: a\nPlayer 2's hand has 0.\nPlayer 2's hand: a\n", outContent.toString());
 	}
 
 	@Test

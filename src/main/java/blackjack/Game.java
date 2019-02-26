@@ -77,10 +77,10 @@ public class Game {
 	// currently unused
     public void promptNextPlayer(){
         if (this.currentPlayer == player1) {
-			System.out.println("It is player 1's turn. Take another card? [y/n] ");
+			System.out.println("\nIt is player 1's turn. Take another card? [y/n] ");
 		}
 		else if (this.currentPlayer == player2) {
-			System.out.println("It is player 2's turn. Take another card? [y/n] ");
+			System.out.println("\nIt is player 2's turn. Take another card? [y/n] ");
 		}
 	}
 	
@@ -91,10 +91,11 @@ public class Game {
 			+ ".";
 		String p2Str = "Player 2's hand has " 
 			+ this.player2.getHand().getScore()
-			+ ".\n" ;
-
+			+ "." ;
 		System.out.println(p1Str);
+		System.out.println("Player 1's hand: " + player1.getHand().toString());
 		System.out.println(p2Str);
+		System.out.println("Player 2's hand: " + player2.getHand().toString());
 	}
 	
 	// Deals cards to current player for as long as they keep asking
@@ -105,13 +106,15 @@ public class Game {
 			String[] a = card.toString().split(":");
 
 			System.out.println("You drew a " + a[1] + " of " + a[0]);
+			System.out.println("########################################");
+
 			currentPlayer.getHand().addCard(card);
 			return true;
 		}
 		
 		else if(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("no")){
+			System.out.println("########################################");
 			return false;
-			
 		}else{
 			throw new InvalidInputException("Invalid input!");
 		}
@@ -127,6 +130,8 @@ public class Game {
 			}
 			if (this.currentPlayer.getHand().getScore() > 21) {
 				Player p = null;
+				System.out.println("That's a bust!");
+
 				if (this.currentPlayer == player1) {
 					p = player2;
 				}
@@ -164,6 +169,7 @@ public class Game {
 		// a player lost by going above 21
 		if (this.winner != null) {
 			calculateWinner();
+			return;
 		}
 
 		nextPlayer();
@@ -192,14 +198,21 @@ public class Game {
 
 	public void calculateWinner() {
 		if (this.winner != null) {
-			System.out.println("\n\n\nPlayer " + getWinnerNum() + " wins!");
+			System.out.println("\n\n\n****Player " + getWinnerNum() + " wins!****");
+
+			System.out.println("Final results---------------------------");
 			printStatus();
+			System.out.println("----------------------------------------");
+
 			return;	
 		}
 		else {
 			if (player1.getHand().getScore() == player2.getHand().getScore()) {
 				this.tie = true;
-				System.out.println("Tie game!");	
+				System.out.println("Tie game!");
+				System.out.println("Final results---------------------------");
+				printStatus();
+				System.out.println("----------------------------------------");	
 				return;
 			}
 			else if (player1.getHand().getScore() > player2.getHand().getScore()) {
@@ -208,8 +221,10 @@ public class Game {
 			else {
 				winner = player2;
 			}
-			System.out.println("\n\n\nPlayer " + getWinnerNum() + " wins!");	
+			System.out.println("\n\n\n****Player " + getWinnerNum() + " wins!****");	
+			System.out.println("Final results---------------------------");
 			printStatus();
+			System.out.println("----------------------------------------");
 		}
 	}
 
@@ -222,8 +237,8 @@ public class Game {
 			String line = keyboardScanner.nextLine();
 			if(line.equalsIgnoreCase("y") || line.equalsIgnoreCase("yes")){
 				validResponse = true;
-	
 				resp = true;
+				System.out.println("\n\n\n\n\n\n");
 			}	
 			else if(line.equalsIgnoreCase("n") || line.equalsIgnoreCase("no")){
 				validResponse = true;
