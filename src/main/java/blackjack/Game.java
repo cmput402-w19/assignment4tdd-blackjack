@@ -12,6 +12,7 @@ public class Game {
 
 	private Player currentPlayer;
 	private Player winner;
+	private boolean draw;
 
 	public Game(Deck deck, Player player1, Player player2) {
 		this.deck = deck;
@@ -20,6 +21,7 @@ public class Game {
 
 		this.currentPlayer = player1;
 		this.winner = null;
+		this.draw = false;
 	}
 	
 	public Player getPlayer1(){
@@ -41,6 +43,10 @@ public class Game {
 	public Player getWinner() {
 		return this.winner;
 	}
+
+	public boolean getDraw() {
+		return this.draw;
+	}
 	
 	public void setDeck(Deck deck) {
 		this.deck = deck;
@@ -57,10 +63,15 @@ public class Game {
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player;
 	}
+
 	public void setWinner(Player player) {
 		this.winner = player;
 	}
 
+	public void setDraw(boolean b) {
+		this.draw = b;
+	}
+	
 	// Code taken from Sarah Nadi's tictactoe need proper citation
 	// currently unused
     public void promptNextPlayer(){
