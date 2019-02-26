@@ -65,5 +65,10 @@ public class Hand {
 		this.cards.add(card);
 		
 	}
+
+	// Returns a string with contents in the hand	
+	public String toString() {
+		return "A";
+	}
 	
 }
