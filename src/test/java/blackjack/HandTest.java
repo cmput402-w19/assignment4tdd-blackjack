@@ -92,4 +92,13 @@ public class HandTest extends TestCase {
 		
 	}
 
+	public void testToString() {		
+		hand1.addCard(new Card(Suit.SPADE, Value.KING));
+		hand1.addCard(new Card(Suit.SPADE, Value.KING));
+
+		String s = hand1.toString();
+
+		assertEquals("SPADE:KING, SPADE:KING, SPADE:KING, ", s);
+	}
+
 }

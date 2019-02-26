@@ -183,7 +183,7 @@ public class GameTest extends TestCase {
 	public void testPromptNextPlayer1() {
 		game.promptNextPlayer();
 
-		assertEquals("It is player 1's turn. Take another card? [y/n] \n", outContent.toString());
+		assertEquals("\nIt is player 1's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 
 	@Test
@@ -192,7 +192,7 @@ public class GameTest extends TestCase {
 
 		game.promptNextPlayer();
 
-		assertEquals("It is player 2's turn. Take another card? [y/n] \n", outContent.toString());
+		assertEquals("\nIt is player 2's turn. Take another card? [y/n] \n", outContent.toString());
 	}
 
 	@Test
@@ -201,11 +201,12 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 		when(player2.getHand()).thenReturn(h2);
-
+		when(h1.toString()).thenReturn("a");
+		when(h2.toString()).thenReturn("a");
 		game.printStatus();
 
 		// starting with 0 scores
-		assertEquals("Player 1's hand has 0.\nPlayer 2's hand has 0.\n\n", outContent.toString());
+		assertEquals("\nPlayer 1's hand has 0.\nPlayer 1's hand: a\nPlayer 2's hand has 0.\nPlayer 2's hand: a\n", outContent.toString());
 	}
 
 	@Test
@@ -230,6 +231,9 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
+
 		// player 1 will have a score of 22 (>21), and thus
 		// the other player wins the game
 		when(h1.getScore()).thenReturn(22);
@@ -242,6 +246,9 @@ public class GameTest extends TestCase {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player2.getHand()).thenReturn(h2);
+
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
 
 		game.setCurrentPlayer(player2);
 
@@ -258,6 +265,9 @@ public class GameTest extends TestCase {
 		Hand h2 = mock(Hand.class);
 		when(player2.getHand()).thenReturn(h2);
 
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
+
 		game.setCurrentPlayer(player2);
 
 		// player 2 will have a score of 1 (<21), and thus
@@ -273,6 +283,9 @@ public class GameTest extends TestCase {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
+
+		Card mockCard = mock(Card.class);
+		when(deck.draw()).thenReturn(mockCard);
 
 		game.setCurrentPlayer(player1);
 
@@ -327,8 +340,6 @@ public class GameTest extends TestCase {
 		assertTrue(game.doTurn("p"));
 
 	}
-
-
 
 	@Test
 	public void testGetWinnerNumP1() {
@@ -391,6 +402,35 @@ public class GameTest extends TestCase {
 	}
 
 	@Test
+	public void testPlayRoundGameEndDueToBust() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+		when(h1.getScore()).thenReturn(2);
+		when(h2.getScore()).thenReturn(23);
+		Card c = mock(Card.class);
+		when(c.toString()).thenReturn("a:a");
+		when(deck.draw()).thenReturn(c);
+
+		game.setCurrentPlayer(player2);
+
+
+		String input = "y\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		game.playRound();
+
+		// check that at the end of a game, 
+		// (i.e. nextPlayer looped back to player 1), 
+		// a winner sone chosen
+		assertNotNull(game.getWinner());
+		assertEquals(player1, game.getWinner());
+
+	}
+
+	@Test
 	public void testCalculateWinnerPlayer1Wins() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
@@ -407,19 +447,91 @@ public class GameTest extends TestCase {
 	}
 
 	@Test
-	public void testCalculateWinnerPlayer2Wins() {
+	public void testCalculateWinnerTie() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 		when(player2.getHand()).thenReturn(h2);
 
-		when(h1.getScore()).thenReturn(1);
-		when(h2.getScore()).thenReturn(2);
+		when(h1.getScore()).thenReturn(4);
+		when(h2.getScore()).thenReturn(4);
+
+		game.calculateWinner();
+
+		assertTrue(game.getTie());
+		
+	}
+
+	@Test
+	public void testCalculateWinnerByElimination() {
+		// test that a winner is returned
+		// by this method if there already exists a winner
+		// due to a player going over 21.
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(22);
+		when(h2.getScore()).thenReturn(4);
+
+		game.setWinner(player2);
 
 		game.calculateWinner();
 
 		assertSame(player2, game.getWinner());
 		
+	}
+
+	@Test
+	public void testGetTie() {
+		boolean b = game.getTie();
+
+		assertFalse(b);
+		
+	}
+
+	@Test
+	public void testSetTie() {
+		game.setTie(true);
+
+		assertTrue(game.getTie());
+		
+	}
+
+	@Test
+	public void testCalculateWinnerNoTie() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(4);
+		when(h2.getScore()).thenReturn(3);
+
+		game.calculateWinner();
+
+		assertFalse(game.getTie());
+		
+	}
+
+	@Test
+	public void testAskContinueTrue() {
+		String input = "y\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		assertTrue(game.askContinue());
+	}
+
+	@Test
+	public void testAskContinueFalse() {
+		String input = "n\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		assertFalse(game.askContinue());
+
 	}
 
 }
