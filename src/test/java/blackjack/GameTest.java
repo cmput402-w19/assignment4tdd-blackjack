@@ -473,5 +473,24 @@ public class GameTest extends TestCase {
 		
 	}
 
+	@Test
+	public void testAskContinueTrue() {
+		String input = "y\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		assertTrue(game.askContinue());
+	}
+
+	@Test
+	public void testAskContinueFalse() {
+		String input = "n\n";
+		InputStream  in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		assertFalse(game.askContinue());
+
+	}
+
 }
 
