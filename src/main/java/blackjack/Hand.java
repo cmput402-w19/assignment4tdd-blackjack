@@ -68,7 +68,11 @@ public class Hand {
 
 	// Returns a string with contents in the hand	
 	public String toString() {
-		return "A";
-	}
+		String cardlist = "";
+		int i = 0;
+		for(Card card: this.cards) {
+			cardlist += card.toString() + ", ";
+		}
+		return cardlist;	}
 	
 }
