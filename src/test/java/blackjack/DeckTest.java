@@ -8,6 +8,13 @@ import org.junit.Test;
 
 public class DeckTest {
 
+	@Test
+	public void testDeckContainsCards(){
+		Deck deck = new Deck();
+		deck.createDeck();
+		assertTrue(deck.deckContainsCards(Suit.HEART, Value.KING));
+		assertFalse(deck.deckContainsCards(null, null));
+	}
 	
 	@Test
 	public void testCreateDeck() {

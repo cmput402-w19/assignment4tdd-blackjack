@@ -2,7 +2,12 @@ package blackjack;
 
 import static org.junit.Assert.assertNotEquals;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
+
 
 //spades, hearts, clubs, diamonds
 public class CardTest extends TestCase {
@@ -29,9 +34,16 @@ public class CardTest extends TestCase {
 		assertNotEquals(card6, card7);
 		
 		Card aCard = new Card(Suit.CLUB, Value.EIGHT);
-		Card aCard2 = null;
-		assertTrue(aCard instanceof Card);
-		assertFalse(aCard2 instanceof Card);
+		assertTrue(aCard.equals(aCard));
+		assertFalse(aCard.equals(1));
+		
+	}
+
+	public void testEqualsNotInstance(){
+		Card card1 = new Card(Suit.SPADE, Value.KING);
+		ArrayList lis = new ArrayList<Integer>();
+		assertNotEquals(card1, lis);
+		
 	}
 	
 	public void testGetScore(){

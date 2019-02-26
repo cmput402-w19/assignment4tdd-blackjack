@@ -53,8 +53,8 @@ public class HandTest extends TestCase {
 		
 		assertEquals(hand1, hand2);
 		assertFalse(hand1.equals(hand3));
-		assertTrue(hand1 instanceof Hand);
-		assertFalse(hand4 instanceof Hand);
+		
+		assertFalse(hand1.equals(1));
 		
 	}
 	
