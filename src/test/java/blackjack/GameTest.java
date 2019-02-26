@@ -407,20 +407,53 @@ public class GameTest extends TestCase {
 	}
 
 	@Test
-	public void testCalculateWinnerPlayer2Wins() {
+	public void testGetDraw() {
+		boolean b = game.getDraw();
+
+		assertFalse(b);
+		
+	}
+
+	@Test
+	public void testSetDraw() {
+		game.setDraw(true);
+
+		assertTrue(game.getDraw());
+		
+	}
+
+	@Test
+	public void testCalculateWinnerDraw() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
 		when(player2.getHand()).thenReturn(h2);
 
-		when(h1.getScore()).thenReturn(1);
-		when(h2.getScore()).thenReturn(2);
+		when(h1.getScore()).thenReturn(4);
+		when(h2.getScore()).thenReturn(4);
 
 		game.calculateWinner();
 
-		assertSame(player2, game.getWinner());
+		assertTrue(game.getDraw());
 		
 	}
+
+	@Test
+	public void testCalculateWinnerNoDraw() {
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(4);
+		when(h2.getScore()).thenReturn(3);
+
+		game.calculateWinner();
+
+		assertFalse(game.getDraw());
+		
+	}
+
 
 }
 
