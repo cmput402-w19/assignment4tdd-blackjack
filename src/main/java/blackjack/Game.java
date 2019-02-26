@@ -12,7 +12,7 @@ public class Game {
 
 	private Player currentPlayer;
 	private Player winner;
-	private boolean draw;
+	private boolean tie;
 
 	public Game(Deck deck, Player player1, Player player2) {
 		this.deck = deck;
@@ -21,7 +21,7 @@ public class Game {
 
 		this.currentPlayer = player1;
 		this.winner = null;
-		this.draw = false;
+		this.tie = false;
 	}
 	
 	public Player getPlayer1(){
@@ -44,8 +44,8 @@ public class Game {
 		return this.winner;
 	}
 
-	public boolean getDraw() {
-		return this.draw;
+	public boolean getTie() {
+		return this.tie;
 	}
 	
 	public void setDeck(Deck deck) {
@@ -68,8 +68,8 @@ public class Game {
 		this.winner = player;
 	}
 
-	public void setDraw(boolean b) {
-		this.draw = b;
+	public void setTie(boolean b) {
+		this.tie = b;
 	}
 	
 	// Code taken from Sarah Nadi's tictactoe need proper citation
@@ -155,6 +155,13 @@ public class Game {
 			String line = keyboardScanner.nextLine();
 			repeat = doTurn(line);
 		}
+
+		// if there exists a winner at this point, that means
+		// a player lost by going above 21
+		if (this.winner != null) {
+			calculateWinner();
+		}
+
 		nextPlayer();
 
 		// if looped back to player 1, then everyone has had their turn, so end this game
@@ -180,33 +187,66 @@ public class Game {
 	}
 
 	public void calculateWinner() {
-		if (player1.getHand().getScore() == player2.getHand().getScore()) {
-			this.draw = true;
-			System.out.println("Draw game!");	
-			return;
-		}
-		else if (player1.getHand().getScore() > player2.getHand().getScore()) {
-			winner = player1; 
+		if (this.winner != null) {
+			System.out.println("Player " + getWinnerNum() + " wins!");
+			return;	
 		}
 		else {
-			winner = player2;
+			if (player1.getHand().getScore() == player2.getHand().getScore()) {
+				this.tie = true;
+				System.out.println("Tie game!");	
+				return;
+			}
+			else if (player1.getHand().getScore() > player2.getHand().getScore()) {
+				winner = player1; 
+			}
+			else {
+				winner = player2;
+			}
+			System.out.println("Player " + getWinnerNum() + " wins!");	
 		}
-		System.out.println("Player " + getWinnerNum() + " wins!");	
+	}
+
+	public boolean askContinue() {
+		System.out.println("Play again? [y/n] ");
+		Scanner keyboardScanner = new Scanner(System.in);
+		boolean validResponse = false;
+		boolean resp = true;
+		while (!validResponse) {
+			String line = keyboardScanner.nextLine();
+			if(line.equalsIgnoreCase("y") || line.equalsIgnoreCase("yes")){
+				validResponse = true;
+	
+				resp = true;
+			}	
+			else if(line.equalsIgnoreCase("n") || line.equalsIgnoreCase("no")){
+				validResponse = true;
+				resp = false;
+			}
+			else {
+				System.out.println("Invalid response. Please try again.");
+			}
+		}
+		return resp;
 	}
 
     public static void main(String args[]){
-		// setup
-		Deck deck = new Deck();		
-		deck.createDeck();
-		deck.shuffleDeck();
-		ArrayList<ArrayList<Card>> cardsList = deck.dealCards();
-		Player player1 = new Player(new Hand(cardsList.get(0)));
-		Player player2 = new Player(new Hand(cardsList.get(1)));
+		boolean continueGame = true;
+		while (continueGame) {
+			// setup
+			Deck deck = new Deck();		
+			deck.createDeck();
+			deck.shuffleDeck();
+			ArrayList<ArrayList<Card>> cardsList = deck.dealCards();
+			Player player1 = new Player(new Hand(cardsList.get(0)));
+			Player player2 = new Player(new Hand(cardsList.get(1)));
 
-		Game game = new Game(deck, player1, player2);
-
-		while (game.getWinner() == null) {
-			game.playRound();
-		};
+			Game game = new Game(deck, player1, player2);
+			
+			while (game.getWinner() == null && !game.getTie()) {
+				game.playRound();
+			};
+			continueGame = game.askContinue();
+		}
 	}
 }
