@@ -328,8 +328,6 @@ public class GameTest extends TestCase {
 
 	}
 
-
-
 	@Test
 	public void testGetWinnerNumP1() {
 		game.setWinner(player1);
@@ -407,23 +405,7 @@ public class GameTest extends TestCase {
 	}
 
 	@Test
-	public void testGetDraw() {
-		boolean b = game.getDraw();
-
-		assertFalse(b);
-		
-	}
-
-	@Test
-	public void testSetDraw() {
-		game.setDraw(true);
-
-		assertTrue(game.getDraw());
-		
-	}
-
-	@Test
-	public void testCalculateWinnerDraw() {
+	public void testCalculateWinnerTie() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
@@ -434,12 +416,49 @@ public class GameTest extends TestCase {
 
 		game.calculateWinner();
 
-		assertTrue(game.getDraw());
+		assertTrue(game.getTie());
 		
 	}
 
 	@Test
-	public void testCalculateWinnerNoDraw() {
+	public void testCalculateWinnerByElimination() {
+		// test that a winner is returned
+		// by this method if there already exists a winner
+		// due to a player going over 21.
+		Hand h1 = mock(Hand.class);
+		Hand h2 = mock(Hand.class);
+		when(player1.getHand()).thenReturn(h1);
+		when(player2.getHand()).thenReturn(h2);
+
+		when(h1.getScore()).thenReturn(22);
+		when(h2.getScore()).thenReturn(4);
+
+		game.setWinner(player2);
+
+		game.calculateWinner();
+
+		assertSame(player2, game.getWinner());
+		
+	}
+
+	@Test
+	public void testGetTie() {
+		boolean b = game.getTie();
+
+		assertFalse(b);
+		
+	}
+
+	@Test
+	public void testSetTie() {
+		game.setTie(true);
+
+		assertTrue(game.getTie());
+		
+	}
+
+	@Test
+	public void testCalculateWinnerNoTie() {
 		Hand h1 = mock(Hand.class);
 		Hand h2 = mock(Hand.class);
 		when(player1.getHand()).thenReturn(h1);
@@ -450,10 +469,9 @@ public class GameTest extends TestCase {
 
 		game.calculateWinner();
 
-		assertFalse(game.getDraw());
+		assertFalse(game.getTie());
 		
 	}
-
 
 }
 
